@@ -28,7 +28,7 @@ public:
 	int MyStrCmp(MyString& b);
 
 	char& operator [](int);
-	void operator ()(const char*);
+	void operator ()();
 
 	void SetStr(const char*);
 	void SetLength(int);

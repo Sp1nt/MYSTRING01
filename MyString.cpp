@@ -39,7 +39,7 @@ MyString::MyString(const MyString& obj) {
 		strcpy_s(str, length + 1, obj.str);
 	}
 	AmountOBJ++;
-	cout << "Copy constructor\n";
+	cout << "Copy constructor\n\n";
 }
 
 //destructor;
@@ -50,7 +50,7 @@ MyString::~MyString()
 		delete[] str;
 		str = nullptr;
 	}
-	cout << "Destructor" << endl;
+	cout << "Destructor\n" << endl;
 }
 
 void MyString::Input()
@@ -84,7 +84,7 @@ void MyString::MyStrcpy(MyString& obj)
 	length = obj.length + 1;
 	str = new char[strlen(obj.str) + 1];
 	strcpy_s(str, strlen(obj.str) + 1, obj.str);
-	cout << "Copy constructor\n";
+	cout << "Copy constructor\n\n";
 
 }
 //searching for a substring in a string
@@ -209,28 +209,23 @@ int MyString::GetLength() const
 
 char& MyString::operator[](int ind)
 {
-	if (ind >= 0 && ind <= length)
-	{
-		return str[ind];
-	}
-
-	return str[0];
+	return str[ind];
 }
 
-void MyString::operator()(const char* inp)
+void MyString::operator()()
 {
 	if (str != nullptr)
 	{
 		delete[]str;
 	}
-	str = new char[strlen(inp) + 1];
-	strcpy_s(str, strlen(inp) + 1, inp);
+	str = new char[length];
+	cin.getline(str, length);
 }
 
 // obj + 'A'
 MyString operator+(const MyString obj, char c) {
 	int len = strlen(obj.GetStr());
-	char* newStr = new char[len];
+	char* newStr = new char[len + 2];
 
 	strcpy_s(newStr, len + 2, obj.GetStr());
 
@@ -252,7 +247,7 @@ MyString operator+(char c, const MyString& obj) {
 	return MyString(nStr);
 }
 
-//obj + int 
+/*obj + int   (перегрузка оператора +)*/
 MyString operator+(const MyString& obj, int num)
 {
 	int newLenght = strlen(obj.GetStr()) + num;
@@ -268,7 +263,7 @@ MyString operator+(const MyString& obj, int num)
 	return MyString(newStr);
 }
 
-//int + obj
+//int + obj (перегрузка оператора +)
 MyString operator+(int num, const MyString& obj)
 {
 	int newLenght = strlen(obj.GetStr()) + num;
@@ -285,14 +280,39 @@ MyString operator+(int num, const MyString& obj)
 }
 
 // obj++
-//MyString operator++(MyString& obj, int)
-//{
-//	
-//}
-//
-////// ++obj
-//MyString& operator++(MyString& obj)
-//{
-//
-//	
-//}
+MyString operator++(MyString& obj, int)
+{
+	int newLength = obj.GetLength() + 1;
+	char* newStr = new char[newLength];
+
+
+	strcpy_s(newStr, newLength, obj.GetStr());
+
+
+	newStr[newLength - 2] = 'A';
+	newStr[newLength - 1] = '\0';
+
+	MyString result(newStr);
+
+	delete[] newStr;
+
+	return result;
+}
+
+// ++obj
+MyString& operator++(MyString& obj)
+{
+	int newLength = obj.GetLength() + 1;
+	char* newStr = new char[newLength];
+
+
+	strcpy_s(newStr, newLength, obj.GetStr());
+
+
+	newStr[newLength - 2] = 'A';
+	newStr[newLength - 1] = '\0';
+
+	obj.SetStr(newStr);
+
+	return obj;
+}

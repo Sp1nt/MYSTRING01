@@ -275,7 +275,7 @@ MyString operator+(char c, const MyString& obj) {
 	}
 }
 
-/*obj + int   (перегрузка оператора +)*/
+//obj + int
 MyString operator+(const MyString& obj, int num)
 {
 	if (obj.GetStr() != 0 && obj.GetLength() != 0)
@@ -298,7 +298,7 @@ MyString operator+(const MyString& obj, int num)
 	}
 }
 
-//int + obj (перегрузка оператора +)
+//int + obj
 MyString operator+(int num, const MyString& obj)
 {
 	if (obj.GetStr() != 0 && obj.GetLength() != 0)

@@ -183,6 +183,20 @@ int MyString::MyStrCmp(MyString& b)
 	return 0;
 }
 
+MyString::MyString(initializer_list<char> a) {
+	cout << "> " << a.size() << endl;
+	length = a.size();
+	str = new char[length + 1];
+
+	for (auto x = a.begin(); x != a.end(); x++) {
+		*str = *x;
+		str++;
+	}
+
+	str -= length;
+	str[length] = '\0';
+}
+
 
 void MyString::SetStr(const char* ñ)
 {
@@ -389,4 +403,24 @@ istream& operator>>(istream& is, MyString& obj)
 	obj.SetStr(a);
 
 	return is;
+}
+
+MyString::MyString(MyString&& obj)
+{
+	length = obj.length;
+	obj.length = 0;
+	str = obj.str;
+	obj.str = nullptr;
+	cout << "Move constructor" << endl;
+}
+
+MyString& MyString::operator=(MyString&& obj)
+{
+
+		length = obj.length;
+		str = obj.str;
+
+		obj.length = 0;
+		obj.str = nullptr;
+	return *this;
 }

@@ -8,6 +8,9 @@ int MyString::AmountOBJ = 0;
 
 int main() {
 
+    MyString testInit = { 'H','e','l','l','o' };
+    testInit.Print();
+    cout << endl << endl;
 
     //MyString firstString("Hello, ");
     //MyString secondString("my friend!");
@@ -164,4 +167,23 @@ int main() {
     cout << "input a string: ";
     cin >> printTest3;
     cout << "You print: " << printTest3 << endl;
+
+    cout << endl << endl;
+    cout << endl << endl;
+
+    //hw4 for string
+
+    
+    MyString str1("Hello");
+
+    MyString str2(move(str1));
+
+    cout << "str2(move str1): " << str2.GetStr() << endl;
+
+    MyString str3("World");
+
+    str2 = move(str3);
+
+
+    cout << "str2(move str3): " << str2.GetStr() << endl;
 }

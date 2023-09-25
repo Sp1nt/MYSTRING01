@@ -13,12 +13,14 @@ public:
 	MyString(int);
 	MyString(const char*);
 	MyString(const MyString& obj);
+	MyString(MyString&&);
 	~MyString();
 
 
 	void Input();
 	void Print() const;
 
+	MyString(initializer_list<char> a);
 	void MyStrcpy(MyString& obj);
 	bool MyStrStr(const char* str);
 	int MyChr(char c);
@@ -29,6 +31,7 @@ public:
 
 	char& operator [](int);
 	void operator ()();
+	MyString& operator =(MyString&& obj);
 
 	void SetStr(const char*);
 	void SetLength(int);

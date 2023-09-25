@@ -80,8 +80,13 @@ int main() {
     //    cout << "firstString == secondString" << endl;
 
     //cout << endl << endl;
-    // overloading []
+    
 
+
+    //hw2 for string
+    
+    
+    // overloading []
     MyString overload1("Halo");
     cout << "Full text for overloading[]" << endl;
     overload1.Print();
@@ -145,4 +150,18 @@ int main() {
     test2.Print();
 
     cout << endl << endl;
+    cout << endl << endl;
+
+    //hw3 for string
+
+    MyString printTask3("Word");
+    cout << "printTask3: " << printTask3 << endl;
+
+    MyString printTest3;
+    printTest3 = printTask3;
+    cout << "printTest3 (after assignment): " << printTest3 << endl;
+
+    cout << "input a string: ";
+    cin >> printTest3;
+    cout << "You print: " << printTest3 << endl;
 }

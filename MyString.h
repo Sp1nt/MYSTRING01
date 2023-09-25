@@ -35,7 +35,12 @@ public:
 
 	char* GetStr() const;
 	int GetLength() const;
+
+	MyString& operator=(const MyString& obj);
 };
+
+ostream& operator<<(ostream&, const MyString&);
+istream& operator>>(istream&, MyString&);
 
 MyString operator+(const MyString obj, char c);
 MyString operator+(char c, const MyString& obj);

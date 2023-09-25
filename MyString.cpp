@@ -224,6 +224,8 @@ void MyString::operator()()
 
 // obj + 'A'
 MyString operator+(const MyString obj, char c) {
+	if (obj.GetStr() != nullptr)
+	{
 	int len = strlen(obj.GetStr());
 	char* newStr = new char[len + 2];
 
@@ -234,10 +236,17 @@ MyString operator+(const MyString obj, char c) {
 
 
 	return MyString(newStr);
+	}
+	else {
+		cout << "It`s empty!" << endl;
+		return MyString("");
+	}
 }
 
 // 'A' + obj
 MyString operator+(char c, const MyString& obj) {
+	if (obj.GetStr() != nullptr)
+	{
 	int len = strlen(obj.GetStr()) + 2;
 	char* nStr = new char[len + 1];
 
@@ -245,11 +254,18 @@ MyString operator+(char c, const MyString& obj) {
 	strcpy_s(nStr + 1, len, obj.GetStr());
 
 	return MyString(nStr);
+	}
+	else { 
+		cout << "It`s empty!" << endl;
+		return MyString("");
+	}
 }
 
 /*obj + int   (перегрузка оператора +)*/
 MyString operator+(const MyString& obj, int num)
 {
+	if (obj.GetStr() != 0 && obj.GetLength() != 0)
+	{
 	int newLenght = strlen(obj.GetStr()) + num;
 	char* newStr = new char[newLenght + 1];
 
@@ -261,11 +277,18 @@ MyString operator+(const MyString& obj, int num)
 	newStr[newLenght] = '\0';
 
 	return MyString(newStr);
+	} 
+	else { 
+		cout << "It`s empty!" << endl; 
+		return MyString("");
+	}
 }
 
 //int + obj (перегрузка оператора +)
 MyString operator+(int num, const MyString& obj)
 {
+	if (obj.GetStr() != 0 && obj.GetLength() != 0)
+	{
 	int newLenght = strlen(obj.GetStr()) + num;
 	char* newStr = new char[newLenght + 1];
 
@@ -277,11 +300,18 @@ MyString operator+(int num, const MyString& obj)
 	newStr[newLenght] = '\0';
 
 	return MyString(newStr);
+	}
+	else {
+		cout << "It`s empty!" << endl;
+		return MyString("");
+	}
 }
 
 // obj++
 MyString operator++(MyString& obj, int)
 {
+	if (obj.GetStr() != 0 && obj.GetLength() != 0)
+	{
 	int newLength = obj.GetLength() + 1;
 	char* newStr = new char[newLength];
 
@@ -297,11 +327,18 @@ MyString operator++(MyString& obj, int)
 	delete[] newStr;
 
 	return result;
+	}
+	else { 
+		cout << "It`s empty!" << endl; 
+		return MyString("");
+	}
 }
 
 // ++obj
 MyString& operator++(MyString& obj)
 {
+	if (obj.GetStr() != 0 && obj.GetLength() != 0)
+	{
 	int newLength = obj.GetLength() + 1;
 	char* newStr = new char[newLength];
 
@@ -315,4 +352,41 @@ MyString& operator++(MyString& obj)
 	obj.SetStr(newStr);
 
 	return obj;
+	}
+	else {
+		cout << "It`s empty!" << endl;
+		return obj;
+	}
+}
+
+MyString& MyString::operator=(const MyString& obj)
+{
+	if (this != &obj)
+	{
+		delete[]str;
+		str = new char[obj.length];
+		length = obj.length;
+
+		for (int i = 0; i < length; ++i)
+			str[i] = obj.str[i];
+	}
+	return *this;
+}
+
+ostream& operator<<(ostream& os, const MyString& obj)
+{
+	os << obj.GetStr() << endl;
+
+	return os;
+}
+
+istream& operator>>(istream& is, MyString& obj)
+{
+	char a[100];
+
+	is.getline(a, sizeof(a));
+
+	obj.SetStr(a);
+
+	return is;
 }
